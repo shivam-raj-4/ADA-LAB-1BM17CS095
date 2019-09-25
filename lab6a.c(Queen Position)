@@ -1,0 +1,49 @@
+#include<stdio.h>
+int place(int x[],int k);
+void nqueens(int n)
+{
+	int k,x[20],count=0;
+	k=1;
+	x[k]=0;
+	while(k!=0)
+	{
+		x[k]++;
+		while(place(x,k)!=1&&x[k]<=4)
+			x[k]++;
+		if(x[k]<=n)
+		{
+			if(k==n)
+			{
+				printf("\nsolution is %d\n",++count);
+				printf("Queen Position");
+				for(k=1;k<=n;k++)
+					printf("\n%d \t%d ",k,x[k]);
+			}
+			else
+			{
+				k++;
+				x[k]=0;
+			}
+		}
+		else
+			k--;
+	}
+}
+int place(int x[],int k)
+{
+	int i;
+	for(i=1;i<=k-1;i++)
+	{
+		if(i+x[i]==k+x[k]||i-x[i]==k-x[k]||x[i]==x[k])
+			return 0;
+	}
+	return 1;
+}
+int main()
+{
+	int n;
+	printf("Enter the no. of Queen\n");
+	scanf("%d",&n);
+	nqueens(n);
+	return 0;
+}
